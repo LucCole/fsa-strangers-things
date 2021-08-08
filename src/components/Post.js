@@ -103,7 +103,6 @@ const Post = ({ editPost, setEditPost, post, setPost, setPosts, isLoggedIn, toke
     }
 
     const cancleClick = () => {
-        console.log('canceld')
         setEditPost(false);
     }
 
@@ -141,8 +140,6 @@ const Post = ({ editPost, setEditPost, post, setPost, setPosts, isLoggedIn, toke
             token: token,
             method: 'PATCH',
         });
-
-        console.log('edit return',data)
 
         cancleClick();
         const fetchedPosts = await fetchPosts(token);

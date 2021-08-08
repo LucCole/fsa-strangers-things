@@ -21,7 +21,6 @@ const App = () => {
     const isLoggedIn = userData.username !== undefined;
 
     useEffect(async () => {
-        console.log('app.js')
         if (posts.length === 0) {
             const fetchedPosts = await fetchPosts(token);
             setPosts(fetchedPosts);

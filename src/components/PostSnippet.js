@@ -63,8 +63,6 @@ const PostSnippet = ({ post, posts, setPost, link, setEditPost }) => {
                         className={classes.button}
                         onClick={() => {
 
-                            console.log(post)
-
                             link !== undefined
                             ?
                             onButtonClick()
