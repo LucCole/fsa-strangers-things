@@ -76,7 +76,9 @@ const Post = ({ editPost, setEditPost, post, setPost, setPosts, isLoggedIn, toke
     const [location, setLocation] = useState(postToRender.location);
     const [willDeliver, setWillDeliver] = useState(postToRender.willDeliver);
     const [open, setOpen] = useState(false);
+    const [messageOpen, setMessageOpen] = useState(false);
     const [success, setEditSuccess] = useState('');
+    const [messageSuccess, setMessageSuccess] = useState('');
 
     const handleClick = () => {
         setOpen(true);
@@ -88,6 +90,18 @@ const Post = ({ editPost, setEditPost, post, setPost, setPosts, isLoggedIn, toke
         }
 
         setOpen(false);
+    };
+
+    const handleMessageClick = () => {
+        setMessageOpen(true);
+    };
+
+    const handleMessageClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setMessageOpen(false);
     };
 
     useEffect(async () => {
@@ -162,6 +176,11 @@ const Post = ({ editPost, setEditPost, post, setPost, setPosts, isLoggedIn, toke
             token: token,
             method: 'POST',
         });
+
+        setNewMessage('');
+
+        setMessageSuccess("Message Sent")
+        handleMessageClick();
     }
 
     return (
@@ -315,6 +334,30 @@ const Post = ({ editPost, setEditPost, post, setPost, setPosts, isLoggedIn, toke
                 <>
                     {success}
                     <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                    <CloseIcon fontSize="small" />
+                    </IconButton>
+                </>
+                }
+            />
+
+            <Snackbar
+                ContentProps={{
+                    classes: {
+                        root: classes.snackbar
+                    }
+                }}
+                className={classes.snackbar}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={messageOpen}
+                onClose={handleMessageClose}
+                autoHideDuration={6000}
+                action={
+                <>
+                    {messageSuccess}
+                    <IconButton size="small" aria-label="close" color="inherit" onClick={handleMessageClose}>
                     <CloseIcon fontSize="small" />
                     </IconButton>
                 </>
